@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Our Hospital</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff7f50, #ff4500); /* Red and Orange Gradient */
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.25rem;
+        }
+
+        section h2 {
+            color: #007bff; /* Blue */
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-vision-card {
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #32cd32, #008000); /* Green Gradient */
+            color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+
+        .mission-vision-card h3 {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            background-color: #0056b3; /* Deep Blue */
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design Adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .mission-vision-card {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 2rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            section h2 {
+                font-size: 1.75rem;
+            }
+
+            .mission-vision-card {
+                padding: 0.8rem;
+            }
+
+            .accordion-button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to [Your Hospital Name]</h1>
+        <p>Delivering Excellence in Healthcare with Compassion and Innovation</p>
+    </header>
+
+    <!-- About Section -->
+    <section class="container my-5">
+        <h2 class="text-center">About Our Hospital</h2>
+        <p class="text-center">
+            At [Your Hospital Name], we are committed to providing world-class healthcare services that cater to the physical, emotional, and psychological well-being of our patients. With a dedicated team of experts and cutting-edge facilities, we ensure the best possible care for every individual.
+        </p>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="container my-5">
+        <h2 class="text-center">Our Mission & Vision</h2>
+        <div class="row g-4 mt-4">
+            <div class="col-md-6">
+                <div class="card mission-vision-card">
+                    <h3>Our Mission</h3>
+                    <p>
+                        To promote health and healing with unmatched excellence and compassion, focusing on the needs of our patients and their families. We aim to foster a culture of innovation and respect in healthcare.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mission-vision-card">
+                    <h3>Our Vision</h3>
+                    <p>
+                        To set a global standard in healthcare by leveraging innovation and research. Our vision is to make advanced and ethical healthcare accessible to every individual, irrespective of socioeconomic status.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="container my-5 highlights">
+        <h2 class="text-center">Highlights of Our Hospital</h2>
+        <div class="accordion mt-4" id="hospitalHighlights">
+            <!-- Highlight 1 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        ✔ 500+ Beds for Advanced Care
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#hospitalHighlights">
+                    <div class="accordion-body">
+                        Our hospital provides over 500 beds equipped with modern amenities and advanced medical technology to cater to a wide range of medical needs, ensuring maximum comfort and care for our patients.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highlight 2 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        ✔ Dedicated Cancer Treatment Center
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#hospitalHighlights">
+                    <div class="accordion-body">
+                        Our state-of-the-art Cancer Treatment Center offers the latest advancements in oncology care, including chemotherapy, radiation therapy, and surgical oncology, supported by a compassionate and skilled team.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highlight 3 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        ✔ State-of-the-art Cardiology Wing
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#hospitalHighlights">
+                    <div class="accordion-body">
+                        The Cardiology Wing is equipped with advanced diagnostic and treatment facilities, offering comprehensive care for heart diseases, from non-invasive tests to complex cardiac surgeries.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 [Your Hospital Name]. All rights reserved. Designed for Excellence in Healthcare.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

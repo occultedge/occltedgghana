@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Occultedge - Hands-On Courses</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+  /* General body styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    overflow-x: hidden;
+  }
+
+  /* Header section with animated droplets */
+  .header {
+    background: linear-gradient(90deg, #007bff, #28a745, #dc3545);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header h1 {
+    font-size: 3rem;
+    margin: 0;
+    z-index: 10;
+    position: relative;
+  }
+
+  .header p {
+    font-size: 1.5rem;
+    margin: 10px 0 0;
+    z-index: 10;
+    position: relative;
+  }
+
+  /* Droplets animation */
+  .droplet {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: fall 5s infinite linear;
+    opacity: 0.7;
+  }
+
+  .droplet:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.8);
+    animation-duration: 4s;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Vibrant Section */
+  .vibrant-section {
+    background: linear-gradient(90deg, #28a745, #dc3545, #007bff);
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+    border-top: 5px solid #343a40;
+  }
+
+  .vibrant-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .vibrant-section i {
+    font-size: 3rem;
+    margin: 20px 0;
+    color: #f8f9fa;
+  }
+
+  /* Course Cards */
+  .course-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+  }
+
+  .course-card {
+    background: linear-gradient(90deg, #007bff, #28a745);
+    border-radius: 10px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+
+  .course-card i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+
+  .course-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .course-card h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
+
+  .course-card p {
+    font-size: 1rem;
+  }
+
+  /* Footer */
+  .footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .footer a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .footer a:hover {
+    color: #28a745;
+    text-decoration: underline;
+  }
+</style>
+
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+   
+     <img src="https://media1.tenor.com/m/Nu4MgmuEZXkAAAAd/teaching-teacher.gif" alt="Occultedge Logo">
+    
+    
+  
+
+  </header>
+<div class="header">
+ 
+  <p>Enhance your skills with our curated courses</p>
+
+  <!-- Animated droplets -->
+  <div class="droplet" style="top: -100px; left: 10%;"></div>
+  <div class="droplet" style="top: -200px; left: 30%;"></div>
+  <div class="droplet" style="top: -300px; left: 50%;"></div>
+  <div class="droplet" style="top: -400px; left: 70%;"></div>
+  <div class="droplet" style="top: -500px; left: 90%;"></div>
+</div>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibrant Course Cards</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .course-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .course-card {
+            width: 340px;
+            background: linear-gradient(135deg, #ff00ff, #ff0080);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.5);
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Different colors for each card */
+        .course-card:nth-child(2) {
+            background: linear-gradient(135deg, #00ff99, #007bff);
+            box-shadow: 0px 5px 20px rgba(0, 255, 153, 0.5);
+        }
+
+        .course-card:nth-child(3) {
+            background: linear-gradient(135deg, #ff00ff, #ff0080);
+            box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.5);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0px 10px 25px rgba(255, 255, 255, 0.6);
+        }
+
+        .course-card i {
+            font-size: 55px;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .course-card h3 {
+            font-size: 24px;
+            margin: 10px 0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .course-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: bold;
+        }
+
+        .course-card a {
+            color: yellow;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .course-card a:hover {
+            color: white;
+            text-shadow: 0 0 10px yellow;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="course-container">
+  <div class="course-card">
+    <i class="fas fa-code"></i>
+    <h3>University Degree Courses</h3>
+    <p>Study online with top Indian universities and access flexible, cost-effective courses from anywhere. <a href="https://www.orionfr.co.in/copy-of-university-collaborations" target="_blank"><strong>Learn more</strong></a>.</p>
+  </div>
+
+  <div class="course-card">
+    <i class="fas fa-paint-brush"></i>
+    <h3>Vocational Courses</h3>
+    <p>Get hands-on skills in Graphic Design, Digital Marketing, Business, and IT. Prepare for real-world careers. <a href="https://www.orionfr.co.in/list-of-courses-apply-now" target="_blank"><strong>Learn more</strong></a></p>
+  </div>
+
+  <div class="course-card">
+    <i class="fas fa-database"></i>
+    <h3>School Courses</h3>
+    <p>Follow a British curriculum with specialized subjects like Business, Computer Science, and Languages.</p>
+    <p><a href="https://occultedge.github.io/onlnschlstaustns/" target="_blank">Click here to select your subjects</a></p>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+ <style>
+    .course-container {
+        position: relative;
+        overflow: hidden;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-container h2 {
+        text-align: center;
+        color: #dc3545; /* Heading color */
+        margin-bottom: 20px;
+    }
+
+    .scroll-wrapper {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 20px;
+        padding-bottom: 10px;
+    }
+
+    .scroll-wrapper::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .scroll-wrapper::-webkit-scrollbar-thumb {
+        background: #007bff;
+        border-radius: 10px;
+    }
+
+    .scroll-wrapper::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .course-card {
+        flex: 0 0 300px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        color: #333; /* Default text color for the card */
+        transition: transform 0.3s ease;
+    }
+
+    .course-card:hover {
+        transform: scale(1.05);
+    }
+
+    .course-card h5 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: #007bff; /* Title color */
+    }
+
+    .course-card p {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        color: #555; /* Body text color */
+    }
+
+    .scroll-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+
+    .scroll-button:hover {
+        background: #0056b3;
+    }
+
+    .scroll-button:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+
+    .scroll-button.left {
+        left: 10px;
+    }
+
+    .scroll-button.right {
+        right: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .course-card {
+            flex: 0 0 250px;
+        }
+
+        .scroll-button {
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+        }
+    }
+</style>
+
+<div class="course-container">
+    <h2>Have a look at some of our High Demand Vocational Courses</h2>
+    <!-- Scrollable Wrapper -->
+    <div class="scroll-wrapper" id="courseScrollWrapper">
+        <!-- Cards -->
+        <div class="course-card">
+            <h5>🧰 Mechanic</h5>
+            <p>Learn vehicle repair and servicing with hands-on practice.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Automotive Mechanic</p>
+        </div>
+        <div class="course-card">
+            <h5>📺 TV Repair</h5>
+            <p>Master troubleshooting and repairing LED/LCD TVs.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified TV Repair Technician</p>
+        </div>
+        <div class="course-card">
+            <h5>🤖 Fridge Repair</h5>
+            <p>Diagnose and repair refrigerators with real-world practice.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Refrigeration Technician</p>
+        </div>
+        <div class="course-card">
+            <h5>📲 Mobile Repair</h5>
+            <p>Repair smartphones with skills in hardware and software fixes.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Mobile Technician</p>
+        </div>
+        <div class="course-card">
+            <h5>🎂 Baking</h5>
+            <p>Create delicious pastries and cakes with hands-on learning.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Baker</p>
+        </div>
+        <div class="course-card">
+            <h5>🌞 Solar Panel Installation</h5>
+            <p>Learn to design and install solar panels for sustainable energy.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Solar Installer</p>
+        </div>
+        <div class="course-card">
+            <h5>💇 Hairdressing and Styling</h5>
+            <p>Professional skills in hair cutting, styling, and coloring.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Hair Stylist</p>
+        </div>
+        <div class="course-card">
+            <h5>🪚 Carpentry and Woodworking</h5>
+            <p>Learn furniture making, wood finishing, and modern techniques.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Carpenter</p>
+        </div>
+        <div class="course-card">
+            <h5>🆒 AC Repair and Maintenance</h5>
+            <p>Master air conditioning systems with hands-on training.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified HVAC Technician</p>
+        </div>
+        <div class="course-card">
+            <h5>💻 Computer Hardware and Networking</h5>
+            <p>Assemble, troubleshoot, and repair computers and networks.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified IT Technician</p>
+        </div>
+        <div class="course-card">
+            <h5>🎨 Tailoring and Fashion Design</h5>
+            <p>Explore the world of fashion design and custom clothing.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Fashion Designer</p>
+        </div>
+        <div class="course-card">
+            <h5>⚡ Electrical Technician Training</h5>
+            <p>Train in electrical system installation and maintenance.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Electrician</p>
+        </div>
+        <div class="course-card">
+            <h5>📷 Photography and Editing</h5>
+            <p>Learn camera techniques and advanced editing skills.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Photographer</p>
+        </div>
+        <div class="course-card">
+            <h5>🧑‍🔧 Plumbing</h5>
+            <p>Learn modern plumbing tools and techniques for repair.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Plumber</p>
+        </div>
+        <div class="course-card">
+            <h5>🥽 Welding and Fabrication</h5>
+            <p>Master welding and metal fabrication with precision skills.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Welder</p>
+        </div>
+        <div class="course-card">
+            <h5>🌱 Organic Farming Techniques</h5>
+            <p>Learn sustainable farming and organic crop production.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Organic Farmer</p>
+        </div>
+        <div class="course-card">
+            <h5>💅 Nail Art and Design</h5>
+            <p>Develop creative skills in nail art and hygiene standards.</p>
+            <p><strong>Duration:</strong> 7 weeks</p>
+            <p><strong>Certification:</strong> Certified Nail Technician</p>
+        </div>
+    </div>
+
+    <!-- Scroll Buttons -->
+    <button class="scroll-button left" onclick="scrollLeft()">&#x276E;</button>
+    <button class="scroll-button right" onclick="scrollRight()">&#x276F;</button>
+</div>
+
+    <!-- Scroll Buttons -->
+    <button class="scroll-button left" onclick="scrollLeft()">&#x276E;</button>
+    <button class="scroll-button right" onclick="scrollRight()">&#x276F;</button>
+</div>
+
+  <!-- Vibrant Section -->
+<img src="https://articulate-heroes-authoring.s3.amazonaws.com/rapid-elearning-blog/0918/header-animated-gifs-2b.gif" alt="Occultedge Logo" style="display: block; margin: 0 auto;">
+
+   
+ <div class="vibrant-section text-center py-5" style="background-color: #2c3e50; color: white;">
+    <h2 class="mb-4">Why Choose Us?</h2>
+    <div class="container">
+        <p style="font-size: 1.2rem;">
+            At Occultedge, we are committed to delivering exceptional education and training through our state-of-the-art <strong>blended learning model</strong>. Our innovative approach combines the flexibility of online learning with the rigor and quality of hands-on practical training, tailored to meet the needs of modern learners.
+        </p>
+
+        <div class="row my-5">
+            <!-- Live Online Classes -->
+            <div class="col-md-4">
+                <div class="p-3" style="background-color: #34495e; border-radius: 10px;">
+                    <h4>Live Online Classes</h4>
+                    <p>
+                        Learn from <strong>expert faculty from India</strong> through interactive live online sessions. Engage directly with instructors in real-time, ask questions, and receive personalized feedback.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Cutting-Edge Study Materials -->
+            <div class="col-md-4">
+                <div class="p-3" style="background-color: #34495e; border-radius: 10px;">
+                    <h4>Cutting-Edge Study Materials</h4>
+                    <p>
+                        Gain access to <strong>world-class study materials</strong>, including comprehensive textbooks, custom-tailored assignments, PowerPoint presentations, and recorded lectures enriched with 2D/3D animations.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Internationally Recognized Certifications -->
+            <div class="col-md-4">
+                <div class="p-3" style="background-color: #34495e; border-radius: 10px;">
+                    <h4>Global Certifications</h4>
+                    <p>
+                        Earn <strong>internationally recognized certifications</strong> upon completing any of our 7-week courses, enhancing your career prospects locally and globally.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <!-- Hands-On Practical Training -->
+            <div class="col-md-4">
+                <div class="p-3" style="background-color: #34495e; border-radius: 10px;">
+                    <h4>Hands-On Practical Training</h4>
+                    <p>
+                        Complement your online learning with <strong>practical, hands-on training</strong> that ensures you master real-world skills in your chosen field.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Flexible Learning Options -->
+            <div class="col-md-4">
+                <div class="p-3" style="background-color: #34495e; border-radius: 10px;">
+                    <h4>Flexible Learning Options</h4>
+                    <p>
+                        Study at your own pace with our blended model, which provides the perfect balance between <strong>structured schedules</strong> and self-directed learning.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Career-Oriented Programs -->
+            <div class="col-md-4">
+                <div class="p-3" style="background-color: #34495e; border-radius: 10px;">
+                    <h4>Career-Focused Courses</h4>
+                    <p>
+                        Choose from a wide range of <strong>career-oriented courses</strong> designed to meet the demands of industries such as automotive, IT, beauty, construction, and more.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 1.2rem;">
+            By choosing us, you are not just enrolling in a course—you are investing in a brighter future, equipped with skills and certifications to excel in your chosen profession. Join a learning community that prioritizes <strong>innovation, accessibility, and excellence</strong>.
+        </p>
+    </div>
+</div>
+
+
+  <style>
+  /* General Styles */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    background: linear-gradient(90deg, #28a745, #007bff, #dc3545);
+    padding: 50px 20px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-out;
+  }
+
+  /* Accordion */
+  .accordion-item {
+    margin-bottom: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: slideIn 1s ease-out;
+  }
+
+  .accordion-header {
+    background: linear-gradient(90deg, #28a745, #007bff);
+    color: white;
+    padding: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .accordion-header:hover {
+    background: linear-gradient(90deg, #dc3545, #28a745);
+  }
+
+  .accordion-button {
+    color: white;
+    font-weight: bold;
+    background: none;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .accordion-button:focus {
+    outline: none;
+  }
+
+  .accordion-button.collapsed::after {
+    content: "▼";
+    float: right;
+  }
+
+  .accordion-button::after {
+    content: "▲";
+    float: right;
+    font-size: 1.2rem;
+    color: #f8f9fa;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .accordion-body {
+    padding: 15px;
+    background: white;
+    color: #333;
+    border-radius: 0 0 8px 8px;
+    line-height: 1.6;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+<iframe src="imgautoscrlngcrsl.html" title="Auto-Scrolling GIF Carousel" style="width: 100%; height: 400px; border: none;"></iframe>
+
+ 
+<div class="faq-section container my-5">
+  <h2 class="text-center">Frequently Asked Questions</h2>
+  <div class="accordion" id="faqAccordion">
+
+    <!-- Course Details -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq1">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+          What is the duration of each course?
+        </button>
+      </h2>
+      <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Each course is 7 weeks long, designed to provide comprehensive training in a short span.
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Mode -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq2">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+          How are the courses delivered?
+        </button>
+      </h2>
+      <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Courses are delivered through a blended learning model that includes live online classes taught by expert faculty, hands-on practical training, and access to recorded lectures and study materials.
+        </div>
+      </div>
+    </div>
+
+    <!-- Certification -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq3">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+          Do I receive a certificate after completing the course?
+        </button>
+      </h2>
+      <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, you will receive an internationally recognized certificate upon successfully completing the course.
+        </div>
+      </div>
+    </div>
+
+    <!-- Eligibility -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq4">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+          Are there any prerequisites for enrolling?
+        </button>
+      </h2>
+      <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Most courses do not require prior experience and are designed for beginners. However, some advanced courses may have specific prerequisites.
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Options -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq5">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+          What are the payment options available?
+        </button>
+      </h2>
+      <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          We offer flexible payment options, including bank transfers, mobile money, and credit/debit card payments. Please contact our support team for more details.
+        </div>
+      </div>
+    </div>
+
+    <!-- Equipment for Online Learning -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq6">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+          Do I need any special equipment for the online classes?
+        </button>
+      </h2>
+      <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          You will need a stable internet connection, a laptop or desktop, and basic tools depending on the course. Specific requirements will be communicated upon registration.
+        </div>
+      </div>
+    </div>
+
+    <!-- Job Placement Assistance -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq7">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+          Will I get job placement assistance after the course?
+        </button>
+      </h2>
+      <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="faq7" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          While we do not guarantee job placements, we offer guidance, resources, and certifications to help you succeed in the job market.
+        </div>
+      </div>
+    </div>
+
+    <!-- Hands-On Training -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq8">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+          Is there any hands-on practical training included?
+        </button>
+      </h2>
+      <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="faq8" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, all courses include hands-on practical training to ensure you gain real-world experience in your chosen field.
+        </div>
+      </div>
+    </div>
+
+    <!-- Course Materials -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq9">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+          Will I get access to course materials after the course is over?
+        </button>
+      </h2>
+      <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="faq9" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, you will retain access to recorded lectures, assignments, and study materials for future reference.
+        </div>
+      </div>
+    </div>
+
+    <!-- Certification Recognition -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq10">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+          Are the certifications internationally recognized?
+        </button>
+      </h2>
+      <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="faq10" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, all certifications provided by Occultedge India and renowned Univrsities that are internationally recognized and enhance your global employability.
+        </div>
+      </div>
+    </div>
+
+    <!-- Refund Policy -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq11">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+          What is your refund policy?
+        </button>
+      </h2>
+      <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="faq11" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Refunds are processed on a case-by-case basis. Please refer to our refund policy or contact support for detailed information.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Contact Section -->
+  <style>
+  /* Contact Section Styling */
+  .contact-section {
+    background: linear-gradient(90deg, #007bff, #28a745, #dc3545);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 5px solid #343a40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Styling and animation for the image */
+  .contact-section img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: bounce 2s infinite, rotate 6s infinite linear;
+  }
+
+  /* Bounce animation */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  /* Rotate animation */
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<!-- Contact Section HTML -->
+<div class="contact-section">
+  <img 
+    src="https://static.wixstatic.com/media/eb9038_42367e2c8de9468c8e5ff2bcb7910964~mv2.png/v1/fill/w_243,h_69,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/occuledge%20logo%20.png" 
+    alt="Orion Edutech Icon" 
+    class="img-fluid"
+  >
+  
+</div>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Occultedge Ghana & Occultedge India. All Rights Reserved.</p>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const scrollWrapper = document.getElementById('courseScrollWrapper');
+
+    function scrollLeft() {
+        scrollWrapper.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+
+    function scrollRight() {
+        scrollWrapper.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

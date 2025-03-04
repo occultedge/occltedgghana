@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Occultedge Ghana </title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/scripts.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .iframe-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .iframe-box h3 {
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem;
+            margin: 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        footer {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .iframe-box {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Occultedge Ghana </h1>
+      
+<iframe src="snippets/notfctnsectn.html" class="responsive-iframe" title="Menu Dropdown" style="width: 100%; height: 100px; border: none; overflow: hidden;"></iframe> 
+       <iframe src="snippets/menudrpdwn.html" class="responsive-iframe" title="Menu Dropdown" style="width: 100%; height: 100px; border: none; overflow: hidden;"></iframe>
+        <iframe src="snippets/actionlinks.html" class="responsive-iframe" title="Menu Dropdown" style="width: 100%; height: 100px; border: none; overflow: hidden;"></iframe>
+        
+    </header>
+    <iframe src="snippets/hsptlcntr.html" title="Hospital Center"></iframe>
+    
+    <iframe 
+    
+                src="snippets/videogrd.html" 
+                style="width: 100%; height: 400px; border: none;">
+            </iframe>
+     <iframe src="snippets/abtanlhbtswnasectin.html" title="About us" style="width: 100%; height: 4500px; border: none;"></iframe>
+    
+    
+            
+        </div>
+
+       
+
+        <!-- Add more iframe boxes as needed -->
+    </div>
+    <div id="apply-widget">
+        <a href="snippets/drclbckfrm.html" target="_blank" title="Apply Now">
+            💼 Join a New Course
+        </a>
+    </div>
+
+    <style>
+        /* Widget Container */
+        #apply-widget {
+            position: fixed;
+            left: -100px; /* Initially off-screen */
+            top: 80%; /* Center vertically */
+            transform: translateY(-50%); /* Perfect vertical centering */
+            width: 80px;
+            height: 80px;
+            background-color: #007bff;
+            border-radius: 50%; /* Makes it circular */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hidden */
+            z-index: 1000;
+            transition: all 0.5s ease; /* Smooth animation */
+        }
+
+        /* Hover Effect */
+        #apply-widget:hover {
+            background-color: #0056b3;
+            transform: translateY(-50%) scale(1.1); /* Slightly enlarges on hover */
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Widget Content (Link) */
+        #apply-widget a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        // Show Widget with Animation After 3 Seconds
+        setTimeout(() => {
+            const widget = document.getElementById('apply-widget');
+            widget.style.display = 'block'; // Make the widget visible
+            widget.style.left = '20px'; // Slide into view
+        }, 3000); // Delay in milliseconds
+    </script>
+<div id="chat-widget">
+    <!-- Chat Toggle Button -->
+    <button id="chat-toggle" onclick="toggleChat()">💬</button>
+
+    <!-- Chat Container with Responsive Iframe -->
+    <div id="chat-container">
+        <iframe 
+            src="snippets/AIchtbt.html" 
+            title="AI Chatbot" 
+            style="width: 100%; height: 100%; border: none;">
+        </iframe>
+    </div>
+</div>
+
+<style>
+    /* Chat Widget Styles */
+    #chat-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    /* Circular Chat Toggle Button */
+    #chat-toggle {
+        width: 0px;
+        height: 0px;
+        border: none;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        font-size: 0px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #chat-toggle:hover {
+        transform: scale(1.1); /* Slight zoom effect */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Chat Container */
+    #chat-container {
+        width: 400px;
+        height: 500px;
+        max-width: 90%; /* Ensures it adjusts to screen width */
+        max-height: 90%; /* Adjusts to viewport height */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        display: none; /* Hidden by default */
+        background-color: white;
+        margin-top: 10px;
+        border: 1px solid #ddd;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+        #chat-container {
+            width: 100%; /* Full width for smaller devices */
+            height: 90%; /* Almost full height for smaller devices */
+        }
+
+        #chat-toggle {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+    }
+
+    /* Very Small Devices */
+    @media (max-width: 480px) {
+        #chat-container {
+            width: 95%; /* Leave some padding */
+            height: 85%; /* Slightly reduced height */
+        }
+
+        #chat-toggle {
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+        }
+    }
+</style>
+
+
+
+    <footer>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Integration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6b73ff, #000dff);
+        }
+
+        .footer-chatbot {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* Minimized height */
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border-top: 3px solid #0056b3;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+            transition: height 0.3s ease;
+            overflow: hidden;
+        }
+
+        .footer-chatbot.expanded {
+            height: 80vh; /* Expanded height */
+        }
+
+        .footer-chatbot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .footer-chatbot-header .toggle-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .footer-chatbot-iframe {
+            width: 100%;
+            height: calc(100% - 60px); /* Deduct header height */
+            border: none;
+            overflow: auto;
+            transition: height 0.3s ease;
+        }
+
+        .footer-chatbot-iframe::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .footer-chatbot-iframe::-webkit-scrollbar-thumb {
+            background: #0056b3;
+            border-radius: 10px;
+        }
+
+        .footer-chatbot-iframe::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-chatbot-header {
+                font-size: 1rem;
+            }
+            .footer-chatbot-iframe {
+                height: calc(100% - 50px); /* Adjust for smaller header */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Footer Chatbot Section -->
+    <div class="footer-chatbot" id="chatbotFooter">
+        <div class="footer-chatbot-header" onclick="toggleChatbot()">
+            Talk to AI Professor
+            <button class="toggle-btn" id="toggleBtn">▲</button>
+        </div>
+        <iframe
+            src="snippets/AIchtbt.html"
+            class="footer-chatbot-iframe"
+            id="chatbotIframe"
+        ></iframe>
+    </div>
+
+    <script>
+        // Function to toggle chatbot expansion
+        function toggleChatbot() {
+            const chatbotFooter = document.getElementById('chatbotFooter');
+            const toggleBtn = document.getElementById('toggleBtn');
+            const isExpanded = chatbotFooter.classList.toggle('expanded');
+            toggleBtn.textContent = isExpanded ? '▼' : '▲';
+        }
+    </script>
+</body>
+</html>
+
+    <h2>Contact Us</h2>
+  <p><strong>Email:</strong> njousia@yahoo.com</p>
+<p><strong>Address: Hse number B116/20
+22 OSAKUMAN ST GA-499-7698</strong>
+Occultedge Ghana , Powered by Occultedge India</p>
+<p>&copy; 2025 Occultedge India. All rights reserved.</p>
+
+    </footer>
+</body>
+</html>

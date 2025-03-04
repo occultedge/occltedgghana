@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Chatbot with Minimize Option</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6b73ff, #000dff);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container-wrapper {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            max-width: 90%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chat-header .toggle-btn {
+            font-size: 1.2rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            background: #f9f9f9;
+            transition: height 0.3s ease, opacity 0.3s ease;
+        }
+
+        .chat-container.minimized {
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f1f1f1;
+            scrollbar-width: thin;
+            scrollbar-color: #007bff #f1f1f1;
+            scroll-behavior: smooth;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 10px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            max-width: 75%;
+        }
+
+        .message.user {
+            background: #007bff;
+            color: #fff;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background: #f1f1f1;
+            color: #333;
+            margin-right: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: #f9f9f9;
+            border-top: 2px solid #ddd;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            margin-right: 10px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .chat-input button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .chat-input button:hover {
+            background: linear-gradient(135deg, #0056b3, #003a80);
+        }
+
+        .chat-input button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container-wrapper">
+        <!-- Header with minimize/maximize toggle -->
+        <div class="chat-header" onclick="toggleChat()">
+            Stylish Chatbot
+            <button class="toggle-btn" id="toggleBtn">−</button>
+        </div>
+        <!-- Chatbot content -->
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your message..." />
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+  <script>
+    const apiKey = '231e3610f2cb02bf6942080dbe2832c67d8a600d625aa1cda5ac884a8f5e59ce';
+    const apiUrl = 'https://api.together.xyz/chat/completions';
+    const maxLength = 700; // Maximum allowed characters for responses
+
+    // Array to store the conversation history
+    const conversationHistory = [
+        { role: 'system', content: `You are a professor teaching the students on various topics they want to understand better after getting taught from the live teachers  . Always ensure your answers are concise, polite, accurate, and do not exceed ${maxLength} characters. Ensure your answers end with a complete sentence and a smiley.` }
+    ];
+
+    // Append a message to the chat
+    function appendMessage(content, sender) {
+        const messagesContainer = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+        messageDiv.textContent = content;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Display a typing indicator
+    function showTypingIndicator() {
+        const messagesContainer = document.getElementById('chatMessages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot typing';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.textContent = 'Typing...';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Remove the typing indicator
+    function hideTypingIndicator() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+
+    // Function to truncate responses and ensure complete sentences
+    function limitToCompleteAnswer(response, maxLength) {
+        if (response.length <= maxLength) {
+            return response;
+        }
+
+        // Attempt to truncate the response at the last period (.) within the limit
+        const truncated = response.substring(0, maxLength);
+        const lastPeriodIndex = truncated.lastIndexOf('.');
+
+        // If a period is found, return the text up to that period
+        if (lastPeriodIndex > 0) {
+            return truncated.substring(0, lastPeriodIndex + 1);
+        }
+
+        // If no period is found, return the truncated text
+        return truncated;
+    }
+
+    // Send a message and get a response from the API
+    async function sendMessage() {
+        const userInput = document.getElementById('userInput').value.trim();
+        if (!userInput) return;
+
+        // Add user input to the chat and to the conversation history
+        appendMessage(userInput, 'user');
+        conversationHistory.push({ role: 'user', content: userInput });
+        document.getElementById('userInput').value = '';
+
+        // Show the typing indicator
+        showTypingIndicator();
+
+        try {
+            // Send the conversation history to the API
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: "google/gemma-2b-it",
+                    messages: conversationHistory
+                })
+            });
+
+            if (!response.ok) {
+                const errorDetails = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorDetails}`);
+            }
+
+            const data = await response.json();
+            let botResponse = data.choices?.[0]?.message?.content || "Sorry, I didn't understand that.";
+
+            // Ensure the response fits the limit and ends with a complete sentence
+            botResponse = limitToCompleteAnswer(botResponse, maxLength);
+
+            // Add bot response to the chat and to the conversation history
+            appendMessage(botResponse, 'bot');
+            conversationHistory.push({ role: 'assistant', content: botResponse });
+        } catch (error) {
+            appendMessage(`Error: ${error.message}`, 'bot');
+            console.error('Error:', error);
+        } finally {
+            // Remove the typing indicator
+            hideTypingIndicator();
+        }
+    }
+
+    // Minimize or maximize the chat container
+    function toggleChat() {
+        const chatContainer = document.getElementById('chatContainer');
+        const toggleBtn = document.getElementById('toggleBtn');
+
+        if (chatContainer.classList.contains('minimized')) {
+            chatContainer.classList.remove('minimized');
+            toggleBtn.textContent = '−';
+        } else {
+            chatContainer.classList.add('minimized');
+            toggleBtn.textContent = '+';
+        }
+    }
+
+    // Initialize the chat with a welcome message
+    window.onload = () => {
+        appendMessage("Welcome! How can I assist you today?", 'bot');
+        document.getElementById('userInput').focus();
+    };
+</script>
+
+
+</body>
+</html>

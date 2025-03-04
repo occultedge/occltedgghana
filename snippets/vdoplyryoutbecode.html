@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=100%, initial-scale=1.0">
+    <title>Watch Video & Chat with Assistant</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        /* Video Container */
+        .video-container {
+            background-color: #fff;
+            padding: 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            width: 100%; 
+            max-width: 1200px;
+            margin: 20px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            height: 70vh; /* Adjusted height for more vertical space */
+        }
+<div class="video-container">
+    <div id="player2"></div>
+    <div id="videoOverlay2" class="video-overlay"></div> <!-- Overlay for 2nd video -->
+</div>
+
+<div class="video-container">
+    <div id="player3"></div>
+    <div id="videoOverlay3" class="video-overlay"></div> <!-- Overlay for 3rd video -->
+</div>
+
+<div class="video-container">
+    <div id="player4"></div>
+    <div id="videoOverlay4" class="video-overlay"></div> <!-- Overlay for 4th video -->
+</div>
+
+        /* Set the dimensions for the player */
+        #player {
+            width: 100%; 
+            height: 100%; /* Adjusted height to match the container */
+        }
+
+        /* Permanent Overlay to hide YouTube title and footer */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1); /* Initially opaque */
+            z-index: 3;
+            pointer-events: all; /* Blocks interactions */
+            transition: background-color 0.3s ease;
+        }
+
+        /* Initial Black Overlay for First 10 Seconds After Play */
+        .initial-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 4; /* Higher than videoOverlay */
+            display: none;
+            pointer-events: none; /* Allows video to play in background */
+        }
+
+        /* Blackout overlay for when the video is paused or buffering */
+        .blackout {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1);
+            z-index: 5;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Controls placed below the video container */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            width: 90%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+        }
+
+        .controls button {
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #ddd;
+        }
+
+        .controls button:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+
+        .time-display {
+            font-size: 16px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        /* Chatbox Styling */
+        #chatbox {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0; /* Increased margin for spacing */
+            /* Removed fixed height to allow dynamic resizing */
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        #messages {
+            flex: 1; /* Allow messages to take up available space */
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            margin: 10px 0;
+        }
+
+        .user {
+            text-align: right;
+            color: blue;
+        }
+
+        .bot {
+            text-align: left;
+            color: green;
+        }
+
+        /* Chat input styling */
+        #inputArea {
+            display: flex;
+            margin-top: 10px;
+            /* Added flex-shrink to prevent overlapping */
+            flex-shrink: 0;
+        }
+
+        #inputArea input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+
+        #inputArea button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        #inputArea button:hover {
+            background-color: #218838;
+        }
+
+        /* Login Overlay */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 50px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 600px;
+            text-align: center;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .login-container button {
+            padding: 12px;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #218838;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Responsive for smaller screens */
+        @media only screen and (max-width: 768px) {
+            .video-container {
+                height: 50vh; /* Adjusted for smaller screens */
+            }
+
+            .controls button {
+                font-size: 14px;
+                margin-right: 5px;
+                padding: 8px 16px;
+            }
+
+            #chatbox {
+                /* Adjust margin for smaller screens */
+                margin: 20px 0;
+            }
+
+            .login-container {
+                width: 90%;
+            }
+        }
+
+        /* Course Content Styling */
+        .course-content {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0; /* Added margin for spacing */
+            box-sizing: border-box;
+        }
+
+        .course-content h1, .course-content h2, .course-content h3 {
+            color: #2e8b57;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div id="loginOverlay">
+        <div class="login-container">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Enter Username test" required>
+            <input type="password" id="password" placeholder="Enter Password test" required>
+            <button onclick="login()">Login</button>
+            <p id="error" class="error"></p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="video-container">
+
+        <div id="player"></div>
+        <div id="videoOverlay" class="video-overlay"></div> <!-- Permanent Overlay -->
+        <div id="initialOverlay" class="initial-overlay"></div> <!-- Initial Black Overlay -->
+        <div id="blackout" class="blackout">Loading/Paused</div> <!-- Blackout Overlay -->
+    </div>
+
+    <!-- Controls below the video container -->
+    <div class="controls" id="controlsContainer" style="display: none;">
+        <button id="playButton" aria-label="Play Video">Play</button>
+        <button id="pauseButton" aria-label="Pause Video">Pause</button>
+        <button id="rewindButton" aria-label="Rewind 10 Seconds">-10s</button>
+        <button id="forwardButton" aria-label="Forward 10 Seconds">+10s</button>
+        <button id="muteButton" aria-label="Mute Video">Mute</button>
+        <button id="unmuteButton" aria-label="Unmute Video">Unmute</button>
+        <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+    </div>
+<div class="slider-container" style="width: 75%; margin-top: 20px;">
+    <input type="range" id="timeSlider" min="0" max="100" value="0" step="1" style="width: 100%;" />
+</div>
+
+    <!-- Chatbot Section -->
+    <div id="chatbox">
+        <h2>Student Assistant</h2>
+        <div id="messages">
+            <!-- Initial bot response -->
+            <div class="message bot">
+                Hi, I am OccultEdge state of an art virtual trainer. Ask me any questions you have while doing the course . E.g. what is imap? 
+            </div>
+        </div>
+        <div id="inputArea">
+            <input type="text" id="userInput" placeholder="Type your message here..." />
+            <button onclick="sendMessage()">Go</button>
+        </div>
+    </div>
+
+    <!-- Removed unnecessary spacing div -->
+
+    <!-- Course Content Section -->
+    <div class="course-content">
+        <!-- Lesson 1: IT Training Course Summary for Nursing Students -->
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        const validUsers = ['rohit', 'utkarsh', 'test', 'arunima', 'bisheline'];
+
+        // Function to handle login
+        function login() {
+            const username = document.getElementById('username').value.trim().toLowerCase();
+            const password = document.getElementById('password').value.trim().toLowerCase();
+            const error = document.getElementById('error');
+
+            if (validUsers.includes(username) && username === password) {
+                document.getElementById('loginOverlay').style.display = 'none'; // Hide login overlay
+                document.getElementById('controlsContainer').style.display = 'flex'; // Show controls
+            } else {
+                error.textContent = "Invalid Username or Password!";
+            }
+        }
+
+        // Variables to hold the player and control buttons
+        let player;
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const rewindButton = document.getElementById('rewindButton');
+        const forwardButton = document.getElementById('forwardButton');
+        const muteButton = document.getElementById('muteButton');
+        const unmuteButton = document.getElementById('unmuteButton');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const blackout = document.getElementById('blackout');
+        const videoOverlay = document.getElementById('videoOverlay');
+        const initialOverlay = document.getElementById('initialOverlay');
+
+        // Flag to check if it's the first play
+        let isFirstPlay = true;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: '2O1nW_KzVEo', // Replace with your video ID
+                playerVars: {
+                    'autoplay': 0, 
+                    'controls': 0,
+                    'cc_load_policy': 1, // Turn on captions
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'showinfo': 0,
+                    'mute': 1 // Start muted
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange 
+                }
+            });
+        }
+// Initialize multiple YouTube players
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        videoId: '2O1nW_KzVEo', // Replace with your video ID
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'cc_load_policy': 1, // Turn on captions
+            'modestbranding': 1,
+            'rel': 0,
+            'showinfo': 0,
+            'mute': 1 // Start muted
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+
+    // Add second player
+    player2 = new YT.Player('player2', {
+        videoId: 'dQw4w9WgXcQ', // Replace with second video ID
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'cc_load_policy': 1,
+            'modestbranding': 1,
+            'rel': 0,
+            'showinfo': 0,
+            'mute': 1
+        },
+        events: {
+            'onReady': onPlayerReady2,
+            'onStateChange': onPlayerStateChange2
+        }
+    });
+
+    // Add third player
+    player3 = new YT.Player('player3', {
+        videoId: 'L_jWHffIx5E', // Replace with third video ID
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'cc_load_policy': 1,
+            'modestbranding': 1,
+            'rel': 0,
+            'showinfo': 0,
+            'mute': 1
+        },
+        events: {
+            'onReady': onPlayerReady3,
+            'onStateChange': onPlayerStateChange3
+        }
+    });
+
+    // Add fourth player
+    player4 = new YT.Player('player4', {
+        videoId: 'eVTXPUF4Oz4', // Replace with fourth video ID
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'cc_load_policy': 1,
+            'modestbranding': 1,
+            'rel': 0,
+            'showinfo': 0,
+            'mute': 1
+        },
+        events: {
+            'onReady': onPlayerReady4,
+            'onStateChange': onPlayerStateChange4
+        }
+    });
+}
+
+// Functions to handle the additional players
+function onPlayerReady2(event) {
+    // Add control functionalities for player2
+}
+
+function onPlayerReady3(event) {
+    // Add control functionalities for player3
+}
+
+function onPlayerReady4(event) {
+    // Add control functionalities for player4
+}
+
+// Add event listener functions for the state changes for each player
+function onPlayerStateChange2(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        // Handle playing state for player2
+    }
+}
+
+function onPlayerStateChange3(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        // Handle playing state for player3
+    }
+}
+
+function onPlayerStateChange4(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        // Handle playing state for player4
+    }
+}
+
+        // Function to handle player events when the player is ready
+        function onPlayerReady(event) {
+            // Add event listeners to control buttons
+
+            playButton.addEventListener('click', function() {
+                if (isFirstPlay) {
+                    isFirstPlay = false;
+                    player.unMute(); // Unmute after first play
+                    player.playVideo();
+
+                    // Make the video overlay transparent to reveal the video
+                    videoOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+
+                    // Show the initial black overlay
+                    initialOverlay.style.display = 'flex';
+
+                    // Disable the Play button to prevent multiple clicks during the initial overlay
+                    playButton.disabled = true;
+
+                    // Hide the initial overlay after 10 seconds and enable the Play button
+                    setTimeout(function() {
+                        initialOverlay.style.display = 'none';
+                        playButton.disabled = false;
+                    }, 10000); // 10000 milliseconds = 10 seconds
+                } else {
+                    player.unMute(); // Unmute if muted
+                    player.playVideo();
+                }
+            });
+
+            pauseButton.addEventListener('click', function() {
+                player.pauseVideo();
+                // The onPlayerStateChange will handle showing the blackout
+            });
+
+            rewindButton.addEventListener('click', function() {
+                let currentTime = player.getCurrentTime();
+                player.seekTo(currentTime - 10, true);
+            });
+
+            forwardButton.addEventListener('click', function() {
+                let currentTime = player.getCurrentTime();
+                player.seekTo(currentTime + 10, true);
+            });
+
+            // Mute functionality
+            muteButton.addEventListener('click', function() {
+                player.mute();
+            });
+
+            // Unmute functionality
+            unmuteButton.addEventListener('click', function() {
+                player.unMute();
+            });
+
+            // Update time display every second
+            setInterval(function() {
+                let currentTime = player.getCurrentTime();
+                let duration = player.getDuration();
+                timeDisplay.innerText = formatTime(currentTime) + ' / ' + formatTime(duration);
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            let minutes = Math.floor(seconds / 60);
+            let secs = Math.floor(seconds % 60);
+            return minutes + ':' + (secs < 10 ? '0' + secs : secs);
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PAUSED) {
+                blackout.style.display = 'flex'; // Show blackout when paused
+                videoOverlay.style.backgroundColor = 'rgba(0, 0, 0, 1)'; // Opaque while paused
+            } else if (event.data === YT.PlayerState.BUFFERING) {
+               // Reference to the time slider
+const timeSlider = document.getElementById('timeSlider');
+
+// Update slider position as the video plays
+player.addEventListener('onStateChange', function(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        updateSlider();
+    }
+});
+
+function updateSlider() {
+    setInterval(function() {
+        if (player && player.getDuration) {
+            let currentTime = player.getCurrentTime();
+            let duration = player.getDuration();
+            timeSlider.max = duration; // Set the max value of the slider to the video duration
+            timeSlider.value = currentTime; // Update the slider position to current time
+        }
+    }, 1000); // Update slider every second
+}
+
+// Change video time based on slider input
+timeSlider.addEventListener('input', function() {
+    let seekTime = timeSlider.value; 
+    player.seekTo(seekTime, true); // Jump to the selected time
+});
+
+ // Show loading and mute during buffering
+                blackout.style.display = 'flex'; // Show blackout with "Loading..."
+                player.mute(); // Mute while buffering
+            } else if (event.data === YT.PlayerState.PLAYING) {
+                blackout.style.display = 'none'; // Hide blackout when playing
+                videoOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0)'; // Transparent while playing
+            }
+        }
+        
+
+        // Chatbot Functionality with Together API
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput').value.trim();
+            if (userInput === "") return;
+
+            appendMessage(userInput, 'user');
+            document.getElementById('userInput').value = '';
+
+            const response = await getBotResponse(userInput);
+            appendMessage(response, 'bot');
+        }
+
+        function appendMessage(message, sender) {
+            const messagesDiv = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${sender}`;
+            if (sender === 'bot') {
+                messageElement.innerHTML = formatBotResponse(message); // Handle formatting for bot
+            } else {
+                messageElement.textContent = message; // Plain text for user
+            }
+            messagesDiv.appendChild(messageElement);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function getBotResponse(message) {
+            const apiKey = '231e3610f2cb02bf6942080dbe2832c67d8a600d625aa1cda5ac884a8f5e59ce'; // Together AI API key
+            const apiUrl = 'https://api.together.xyz/chat/completions'; 
+
+            const prompt = `
+                You are an AI assistant of a company: "OccultEdge" who answers queries of students. Be professional and to the point.\nSTUDENT QUERY: "${message}"
+            `;
+
+            const data = {
+                model: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+                messages: [{ role: "user", content: prompt }],
+                max_tokens: 300,
+                temperature: 0.1
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const result = await response.json();
+                if (result.choices && result.choices.length > 0) {
+                    return result.choices[0].message.content.trim();
+                } else {
+                    return "Sorry, I couldn't process your request. Please try again.";
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                return "Sorry, there was an error processing your request. Please try again later.";
+            }
+        }
+
+        // Function to handle **bold** and \n (newline) formatting
+        function formatBotResponse(response) {
+            const formatted = response
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Replace **bold** with <strong>
+                .replace(/\n/g, '<br>'); // Replace \n with <br> for line breaks
+            return formatted;
+        }
+        
+    </script>
+</body>
+</html>

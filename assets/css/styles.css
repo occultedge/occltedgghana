@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+header, footer {
+    background-color: #0056b3;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+header nav ul li a, footer ul li a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px;
+    background: #eee;
+}
+
+.hero .btn {
+    margin: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #0056b3;
+    color: #ffffff;
+    border-radius: 5px;
+}
+

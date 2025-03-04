@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Assessment Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cccccc;
+            margin: 2px;
+            padding: 2px;
+        }
+        .container {
+            width: 70%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, textarea, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .required {
+            color: red;
+        }
+        .tube {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: none;
+        }
+        .tube-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Assessment Form</h2>
+        <form id="admissionForm">
+            <label for="fullName">Full Name<span class="required">*</span></label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+
+            <label for="emailAddress">Email Address<span class="required">*</span></label>
+            <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your email" required>
+
+            <label for="phoneNumber">Phone Number<span class="required">*</span></label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required pattern="[0-9]{10,15}" title="Phone number should be between 10-15 digits">
+
+            <label for="dob">Date of Birth<span class="required">*</span></label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="address">Complete Address<span class="required">*</span></label>
+            <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
+
+            <label for="country">Country<span class="required">*</span></label>
+            <select id="country" name="country" required>
+                <option value="">Select your country</option>
+                 <option value="Afghanistan">Afghanistan</option>
+<option value="Albania">Albania</option>
+<option value="Algeria">Algeria</option>
+<option value="Andorra">Andorra</option>
+<option value="Angola">Angola</option>
+<option value="Antigua and Barbuda">Antigua and Barbuda</option>
+<option value="Argentina">Argentina</option>
+<option value="Armenia">Armenia</option>
+<option value="Australia">Australia</option>
+<option value="Austria">Austria</option>
+<option value="Azerbaijan">Azerbaijan</option>
+<option value="Bahamas">Bahamas</option>
+<option value="Bahrain">Bahrain</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Barbados">Barbados</option>
+<option value="Belarus">Belarus</option>
+<option value="Belgium">Belgium</option>
+<option value="Belize">Belize</option>
+<option value="Benin">Benin</option>
+<option value="Bhutan">Bhutan</option>
+<option value="Bolivia">Bolivia</option>
+<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+<option value="Botswana">Botswana</option>
+<option value="Brazil">Brazil</option>
+<option value="Brunei">Brunei</option>
+<option value="Bulgaria">Bulgaria</option>
+<option value="Burkina Faso">Burkina Faso</option>
+<option value="Burundi">Burundi</option>
+<option value="Cabo Verde">Cabo Verde</option>
+<option value="Cambodia">Cambodia</option>
+<option value="Cameroon">Cameroon</option>
+<option value="Canada">Canada</option>
+<option value="Central African Republic">Central African Republic</option>
+<option value="Chad">Chad</option>
+<option value="Chile">Chile</option>
+<option value="China">China</option>
+<option value="Colombia">Colombia</option>
+<option value="Comoros">Comoros</option>
+<option value="Congo (Congo-Brazzaville)">Congo (Congo-Brazzaville)</option>
+<option value="Costa Rica">Costa Rica</option>
+<option value="Croatia">Croatia</option>
+<option value="Cuba">Cuba</option>
+<option value="Cyprus">Cyprus</option>
+<option value="Czechia (Czech Republic)">Czechia (Czech Republic)</option>
+<option value="Denmark">Denmark</option>
+<option value="Djibouti">Djibouti</option>
+<option value="Dominica">Dominica</option>
+<option value="Dominican Republic">Dominican Republic</option>
+<option value="Ecuador">Ecuador</option>
+<option value="Egypt">Egypt</option>
+<option value="El Salvador">El Salvador</option>
+<option value="Equatorial Guinea">Equatorial Guinea</option>
+<option value="Eritrea">Eritrea</option>
+<option value="Estonia">Estonia</option>
+<option value="Eswatini (fmr. Swaziland)">Eswatini (fmr. Swaziland)</option>
+<option value="Ethiopia">Ethiopia</option>
+<option value="Fiji">Fiji</option>
+<option value="Finland">Finland</option>
+<option value="France">France</option>
+<option value="Gabon">Gabon</option>
+<option value="Gambia">Gambia</option>
+<option value="Georgia">Georgia</option>
+<option value="Germany">Germany</option>
+<option value="Ghana">Ghana</option>
+<option value="Greece">Greece</option>
+<option value="Grenada">Grenada</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Guinea">Guinea</option>
+<option value="Guinea-Bissau">Guinea-Bissau</option>
+<option value="Guyana">Guyana</option>
+<option value="Haiti">Haiti</option>
+<option value="Holy See">Holy See</option>
+<option value="Honduras">Honduras</option>
+<option value="Hungary">Hungary</option>
+<option value="Iceland">Iceland</option>
+<option value="Indonesia">Indonesia</option>
+<option value="Iran">Iran</option>
+<option value="Iraq">Iraq</option>
+<option value="Ireland">Ireland</option>
+<option value="Israel">Israel</option>
+<option value="Italy">Italy</option>
+<option value="Jamaica">Jamaica</option>
+<option value="Japan">Japan</option>
+<option value="Jordan">Jordan</option>
+<option value="Kazakhstan">Kazakhstan</option>
+<option value="Kenya">Kenya</option>
+<option value="Kiribati">Kiribati</option>
+<option value="Korea (North)">Korea (North)</option>
+<option value="Korea (South)">Korea (South)</option>
+<option value="Kosovo">Kosovo</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Kyrgyzstan">Kyrgyzstan</option>
+<option value="Laos">Laos</option>
+<option value="Latvia">Latvia</option>
+<option value="Lebanon">Lebanon</option>
+<option value="Lesotho">Lesotho</option>
+<option value="Liberia">Liberia</option>
+<option value="Libya">Libya</option>
+<option value="Liechtenstein">Liechtenstein</option>
+<option value="Lithuania">Lithuania</option>
+<option value="Luxembourg">Luxembourg</option>
+<option value="Madagascar">Madagascar</option>
+<option value="Malawi">Malawi</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Maldives">Maldives</option>
+<option value="Mali">Mali</option>
+<option value="Malta">Malta</option>
+<option value="Marshall Islands">Marshall Islands</option>
+<option value="Mauritania">Mauritania</option>
+<option value="Mauritius">Mauritius</option>
+<option value="Mexico">Mexico</option>
+<option value="Micronesia">Micronesia</option>
+<option value="Moldova">Moldova</option>
+<option value="Monaco">Monaco</option>
+<option value="Mongolia">Mongolia</option>
+<option value="Montenegro">Montenegro</option>
+<option value="Morocco">Morocco</option>
+<option value="Mozambique">Mozambique</option>
+<option value="Myanmar (Burma)">Myanmar (Burma)</option>
+<option value="Namibia">Namibia</option>
+<option value="Nauru">Nauru</option>
+<option value="Nepal">Nepal</option>
+<option value="Netherlands">Netherlands</option>
+<option value="New Zealand">New Zealand</option>
+<option value="Nicaragua">Nicaragua</option>
+<option value="Niger">Niger</option>
+<option value="Nigeria">Nigeria</option>
+<option value="North Macedonia">North Macedonia</option>
+<option value="Norway">Norway</option>
+<option value="Oman">Oman</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Palau">Palau</option>
+<option value="Palestine State">Palestine State</option>
+<option value="Panama">Panama</option>
+<option value="Papua New Guinea">Papua New Guinea</option>
+<option value="Paraguay">Paraguay</option>
+<option value="Peru">Peru</option>
+<option value="Philippines">Philippines</option>
+<option value="Poland">Poland</option>
+<option value="Portugal">Portugal</option>
+<option value="Qatar">Qatar</option>
+<option value="Romania">Romania</option>
+<option value="Russia">Russia</option>
+<option value="Rwanda">Rwanda</option>
+<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+<option value="Saint Lucia">Saint Lucia</option>
+<option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+<option value="Samoa">Samoa</option>
+<option value="San Marino">San Marino</option>
+<option value="Sao Tome and Principe">Sao Tome and Principe</option>
+<option value="Saudi Arabia">Saudi Arabia</option>
+<option value="Senegal">Senegal</option>
+<option value="Serbia">Serbia</option>
+<option value="Seychelles">Seychelles</option>
+<option value="Sierra Leone">Sierra Leone</option>
+<option value="Singapore">Singapore</option>
+<option value="Slovakia">Slovakia</option>
+<option value="Slovenia">Slovenia</option>
+<option value="Solomon Islands">Solomon Islands</option>
+<option value="Somalia">Somalia</option>
+<option value="South Africa">South Africa</option>
+<option value="South Sudan">South Sudan</option>
+<option value="Spain">Spain</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Sudan">Sudan</option>
+<option value="Suriname">Suriname</option>
+<option value="Sweden">Sweden</option>
+<option value="Switzerland">Switzerland</option>
+<option value="Syria">Syria</option>
+<option value="Tajikistan">Tajikistan</option>
+<option value="Tanzania">Tanzania</option>
+<option value="Thailand">Thailand</option>
+<option value="Timor-Leste">Timor-Leste</option>
+<option value="Togo">Togo</option>
+<option value="Tonga">Tonga</option>
+<option value="Trinidad and Tobago">Trinidad and Tobago</option>
+<option value="Tunisia">Tunisia</option>
+<option value="Turkey">Turkey</option>
+<option value="Turkmenistan">
+	 <option value="Turkmenistan">Turkmenistan</option>
+<option value="Tuvalu">Tuvalu</option>
+<option value="Uganda">Uganda</option>
+<option value="Ukraine">Ukraine</option>
+<option value="United Arab Emirates">United Arab Emirates</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="United States">United States</option>
+<option value="Uruguay">Uruguay</option>
+<option value="Uzbekistan">Uzbekistan</option>
+<option value="Vanuatu">Vanuatu</option>
+<option value="Vatican City">Vatican City</option>
+<option value="Venezuela">Venezuela</option>
+<option value="Vietnam">Vietnam</option>
+<option value="Yemen">Yemen</option>
+<option value="Zambia">Zambia</option>
+<option value="Zimbabwe">Zimbabwe</option>
+                <!-- Add more countries as needed -->
+            </select>
+
+            <label for="selectedCourse">Select Course<span class="required">*</span></label>
+            <select id="selectedCourse" name="selectedCourse" required>
+                <option value="">Select your course</option>
+                <option value="Advanced Beauty Therapy">Advanced Beauty Therapy</option>
+<option value="Advanced Fire Safety Management">Advanced Fire Safety Management</option>
+<option value="Advanced Mobile Phone Repairing">Advanced Mobile Phone Repairing</option>
+<option value="Agro-Product Packaging and Processing">Agro-Product Packaging and Processing</option>
+<option value="AI and Machine Learning Applications">AI and Machine Learning Applications</option>
+<option value="Automotive Electronics and Diagnostics">Automotive Electronics and Diagnostics</option>
+<option value="Bachelor of Allied Health Sciences">Bachelor of Allied Health Sciences</option>
+<option value="Bachelor of Artificial Intelligence and Data Science">Bachelor of Artificial Intelligence and Data Science</option>
+<option value="Bachelor of Business Administration">Bachelor of Business Administration</option>
+<option value="Bachelor of Civil Engineering">Bachelor of Civil Engineering</option>
+<option value="Bachelor of Fire and Safety Engineering">Bachelor of Fire and Safety Engineering</option>
+<option value="Bachelor of Hotel and Tourism Management">Bachelor of Hotel and Tourism Management</option>
+<option value="Bachelor of Management Studies">Bachelor of Management Studies</option>
+<option value="Bachelor of Nursing">Bachelor of Nursing</option>
+<option value="Bachelor of Public Health">Bachelor of Public Health</option>
+<option value="Bachelor of Science in Computer Applications">Bachelor of Science in Computer Applications</option>
+<option value="Bachelor of Technology in IT and Networking">Bachelor of Technology in IT and Networking</option>
+<option value="Basic Firefighting and Safety">Basic Firefighting and Safety</option>
+<option value="Basic Life Support (BLS)">Basic Life Support (BLS)</option>
+<option value="Beauty and Wellness">Beauty and Wellness</option>
+<option value="Building Construction and Estimation">Building Construction and Estimation</option>
+<option value="Cloud Computing Basics">Cloud Computing Basics</option>
+<option value="Culinary Arts and Hospitality Leadership">Culinary Arts and Hospitality Leadership</option>
+<option value="Cybersecurity and Ethical Hacking">Cybersecurity and Ethical Hacking</option>
+<option value="Cybersecurity Essentials">Cybersecurity Essentials</option>
+<option value="Data Analytics and Business Intelligence">Data Analytics and Business Intelligence</option>
+<option value="Diploma in Hospitality Management">Diploma in Hospitality Management</option>
+<option value="Diploma in Nursing">Diploma in Nursing</option>
+<option value="Fiber Optic Technology">Fiber Optic Technology</option>
+<option value="First Aid and Emergency Care">First Aid and Emergency Care</option>
+<option value="Food Preservation Techniques">Food Preservation Techniques</option>
+<option value="Front Office and Housekeeping Services">Front Office and Housekeeping Services</option>
+<option value="General Medicine and Surgery">General Medicine and Surgery</option>
+<option value="Geriatric Care Management">Geriatric Care Management</option>
+<option value="Hairdressing Basics">Hairdressing Basics</option>
+<option value="IT Hardware and Networking">IT Hardware and Networking</option>
+<option value="IoT (Internet of Things)">IoT (Internet of Things)</option>
+<option value="Makeup Artistry">Makeup Artistry</option>
+<option value="Master in Hotel and Tourism Management">Master in Hotel and Tourism Management</option>
+<option value="Master in Strategic Management">Master in Strategic Management</option>
+<option value="Master of Artificial Intelligence">Master of Artificial Intelligence</option>
+<option value="Master of Business Administration (MBA)">Master of Business Administration (MBA)</option>
+<option value="Master of Cloud Computing and Cybersecurity">Master of Cloud Computing and Cybersecurity</option>
+<option value="Master of Healthcare Administration">Master of Healthcare Administration</option>
+<option value="Master of Nursing">Master of Nursing</option>
+<option value="Master of Public Health">Master of Public Health</option>
+<option value="Mobile Phone Repairing">Mobile Phone Repairing</option>
+<option value="Nail Art and Extensions">Nail Art and Extensions</option>
+<option value="Networking and IT Infrastructure Management">Networking and IT Infrastructure Management</option>
+<option value="Office Administration">Office Administration</option>
+<option value="Organic Farming">Organic Farming</option>
+<option value="Patient Care and Assistance">Patient Care and Assistance</option>
+<option value="Personal Fitness Trainer">Personal Fitness Trainer</option>
+<option value="Sustainable Farming Practices">Sustainable Farming Practices</option>
+<option value="Vehicle Servicing and Maintenance">Vehicle Servicing and Maintenance</option>
+<option value="Web Development">Web Development</option>
+<option value="Wellness and Spa Management">Wellness and Spa Management</option>
+<option value="TV Repair">TV Repair</option>
+<option value="Fridge Repair">Fridge Repair</option>
+<option value="Mobile Repair">Mobile Repair</option>
+<option value="Baking">Baking</option>
+<option value="Solar Panel Installation">Solar Panel Installation</option>
+<option value="Hairdressing and Styling">Hairdressing and Styling</option>
+<option value="Carpentry and Woodworking">Carpentry and Woodworking</option>
+<option value="AC Repair and Maintenance">AC Repair and Maintenance</option>
+<option value="Computer Hardware and Networking">Computer Hardware and Networking</option>
+<option value="Tailoring and Fashion Design">Tailoring and Fashion Design</option>
+<option value="Electrical Technician Training">Electrical Technician Training</option>
+<option value="Photography and Editing">Photography and Editing</option>
+<option value="Plumbing">Plumbing</option>
+<option value="Welding and Fabrication">Welding and Fabrication</option>
+<option value="Organic Farming Techniques">Organic Farming Techniques</option>
+<option value="Nail Art and Design">Nail Art and Design</option>
+
+                <!-- Add more courses as needed -->
+            </select>
+
+            <label for="courseDuration">Course Duration<span class="required">*</span></label>
+            <select id="courseDuration" name="courseDuration" required>
+                <option value="">Select duration</option>
+        <option value="2 days">2 days</option>
+        <option value="1 week">1 week</option>
+        <option value="1 month">1 month</option>
+        <option value="3 months">3 months</option>
+        <option value="6 months">6 months</option>
+        <option value="1 year">1 year</option>
+        <option value="2 years">2 years</option>
+        <option value="3 years">3 years</option>
+        <option value="4 years">4 years</option>
+            </select>
+
+            <label for="modeOfLearning">Mode Of Learning<span class="required">*</span></label>
+            <select id="modeOfLearning" name="modeOfLearning" required>
+                <option value="">Select mode</option>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+                <option value="Blended">Blended</option>
+            </select>
+
+            <label for="preferredStartDate">Preferred Start Date<span class="required">*</span></label>
+            <input type="date" id="preferredStartDate" name="preferredStartDate" required>
+
+            <label for="purpose">Purpose of Doing the Course<span class="required">*</span></label>
+            <select id="purpose" name="purpose" required>
+                <option value="">Select purpose</option>
+                <option value="Only Certification">Only Certification</option>
+    <option value="Placement">Placement</option>
+    <option value="Both Certification and Placement">Both Certification and Placement</option>
+    <option value="Enhancing Knowledge">Enhancing Knowledge</option>
+    <option value="Promotion in Current Job">Promotion in Current Job</option>
+    <option value="Other">Other (Please specify in comments)</option>
+            </select>
+
+            <label for="additionalComments">Additional Comments</label>
+            <textarea id="additionalComments" name="additionalComments" placeholder="Enter any additional details"></textarea>
+
+            <div class="tube">
+                <div class="tube-fill"></div>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('admissionForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx1tfLx4uqqaIUawSQLrMZImD3xCkFq57ITVc-FJsMCUdCmMbsml8KA4gUh6zjNIHEf/exec'; // Replace with your Apps Script URL
+            const formData = new FormData(event.target);
+
+            // Show the "filling tube" animation
+            const tube = document.querySelector('.tube');
+            const tubeFill = document.querySelector('.tube-fill');
+            tube.style.display = 'block'; // Make the tube visible
+            tubeFill.style.width = '0%'; // Reset tube width to 0
+
+            let progress = 0; // Initialize progress value
+            const animationInterval = setInterval(() => {
+                if (progress < 100) {
+                    progress += 5; // Increment progress
+                    tubeFill.style.width = `${progress}%`;
+                }
+            }, 200);
+
+            // Submit the form data to the Google Apps Script
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formData,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        alert('Thank you! Your application has been submitted.');
+                        event.target.reset(); // Reset the form
+                    } else {
+                        throw new Error('Failed to submit the form. Please try again.');
+                    }
+                })
+                .catch((error) => {
+                    alert('There was an error submitting the form. Please try again.');
+                    console.error('Error:', error);
+                })
+                .finally(() => {
+                    // Stop the animation and hide the tube
+                    clearInterval(animationInterval);
+                    tube.style.display = 'none'; // Hide the tube
+                });
+        });
+    </script>
+</body>
+</html>

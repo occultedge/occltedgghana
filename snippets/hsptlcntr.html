@@ -1,0 +1,123 @@
+<div class="counter-container">
+  <!-- Patients Counter -->
+  <div class="counter-box">
+    <div id="patients" class="counter-number">0</div>
+    <div class="counter-text">1,000,000+ Students Trained</div>
+  </div>
+
+  <!-- Surgeries Counter -->
+  <div class="counter-box">
+    <div id="surgeries" class="counter-number">0</div>
+    <div class="counter-text">50,000+ Corporate Trainings done</div>
+  </div>
+
+  <!-- Specialists Counter -->
+  <div class="counter-box">
+    <div id="specialists" class="counter-number">0</div>
+    <div class="counter-text">2000+ Trainers</div>
+  </div>
+
+  <!-- Facilities Counter -->
+  <div class="counter-box">
+    <div id="facilities" class="counter-number">0</div>
+    <div class="counter-text">50+ Franchise Centers</div>
+  </div>
+</div>
+
+<style>
+  /* Counter Container */
+  .counter-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+
+  /* Individual Counter Box */
+  .counter-box {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: white;
+    flex: 1 1 200px; /* Responsive width with a minimum size */
+    max-width: 250px; /* Optional max width for large screens */
+  }
+
+  /* Gradient Backgrounds for Each Counter */
+  .counter-box:nth-child(1) {
+    background: linear-gradient(135deg, #ff7f50, #ff4500);
+  }
+
+  .counter-box:nth-child(2) {
+    background: linear-gradient(135deg, #32cd32, #008000);
+  }
+
+  .counter-box:nth-child(3) {
+    background: linear-gradient(135deg, #1e90ff, #007bff);
+  }
+
+  .counter-box:nth-child(4) {
+    background: linear-gradient(135deg, #ffd700, #ffa500);
+  }
+
+  /* Counter Number */
+  .counter-number {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  /* Counter Text */
+  .counter-text {
+    font-size: 1.2em;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .counter-box {
+      flex: 1 1 45%; /* Adjust size for tablets */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .counter-box {
+      flex: 1 1 100%; /* Stack counters on smaller devices */
+    }
+
+    .counter-number {
+      font-size: 2em; /* Slightly smaller numbers */
+    }
+
+    .counter-text {
+      font-size: 1em;
+    }
+  }
+</style>
+
+<script>
+  function animateCounter(id, end, duration) {
+    const element = document.getElementById(id);
+    let current = 0;
+    const increment = end / (duration / 6);
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= end) {
+        current = end;
+        clearInterval(timer);
+      }
+      element.textContent = Math.floor(current).toLocaleString();
+    }, 6);
+  }
+
+  window.onload = function() {
+    animateCounter("patients", 1000000, 10000);
+    animateCounter("surgeries", 50000, 10000);
+    animateCounter("specialists", 2000, 10000);
+    animateCounter("facilities", 50, 10000);
+  };
+</script>
+

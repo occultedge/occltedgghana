@@ -1,0 +1,22 @@
+/* General Responsive Iframe Styling */
+iframe {
+    position: relative;
+    width: 100%; /* Full width of the parent container */
+    aspect-ratio: 16 / 9; /* Maintains a responsive aspect ratio */
+    border: none; /* Remove iframe border */
+    overflow: hidden; /* Hide scrollbars */
+}
+
+/* Optional Responsive Adjustments */
+@media (max-width: 768px) {
+    iframe {
+        aspect-ratio: 16 / 10; /* Adjust aspect ratio for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    iframe {
+        aspect-ratio: 4 / 3; /* Adjust aspect ratio for very small screens */
+    }
+}
+
