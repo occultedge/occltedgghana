@@ -1,302 +1,242 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish Chatbot with Minimize Option</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #6b73ff, #000dff);
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .chat-container-wrapper {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 400px;
-            max-width: 90%;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .chat-header .toggle-btn {
-            font-size: 1.2rem;
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: 400px;
-            background: #f9f9f9;
-            transition: height 0.3s ease, opacity 0.3s ease;
-        }
-
-        .chat-container.minimized {
-            height: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background-color: #f1f1f1;
-            scrollbar-width: thin;
-            scrollbar-color: #007bff #f1f1f1;
-            scroll-behavior: smooth;
-        }
-
-        .chat-messages::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .chat-messages::-webkit-scrollbar-thumb {
-            background: #007bff;
-            border-radius: 10px;
-        }
-
-        .chat-messages::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .message {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 10px;
-            line-height: 1.5;
-            font-size: 0.95rem;
-            max-width: 75%;
-        }
-
-        .message.user {
-            background: #007bff;
-            color: #fff;
-            margin-left: auto;
-        }
-
-        .message.bot {
-            background: #f1f1f1;
-            color: #333;
-            margin-right: auto;
-        }
-
-        .chat-input {
-            display: flex;
-            padding: 15px;
-            background: #f9f9f9;
-            border-top: 2px solid #ddd;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 25px;
-            margin-right: 10px;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .chat-input input:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-
-        .chat-input button {
-            padding: 12px 20px;
-            font-size: 1rem;
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: #fff;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .chat-input button:hover {
-            background: linear-gradient(135deg, #0056b3, #003a80);
-        }
-
-        .chat-input button:active {
-            transform: scale(0.95);
-        }
-    </style>
-</head>
-<body>
-    <div class="chat-container-wrapper">
-        <!-- Header with minimize/maximize toggle -->
-        <div class="chat-header" onclick="toggleChat()">
-            Stylish Chatbot
-            <button class="toggle-btn" id="toggleBtn">−</button>
-        </div>
-        <!-- Chatbot content -->
-        <div class="chat-container" id="chatContainer">
-            <div class="chat-messages" id="chatMessages"></div>
-            <div class="chat-input">
-                <input type="text" id="userInput" placeholder="Type your message..." />
-                <button onclick="sendMessage()">Send</button>
-            </div>
-        </div>
+<!-- CHATBOT START -->
+<div class="chat-container-wrapper">
+  <div class="chat-header">
+    Talk to Our AI Counsellor
+    <button class="toggle-btn" onclick="toggleChat(event)" id="toggleBtn">−</button>
+  </div>
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your message..." onkeydown="handleEnter(event)" />
+      <button onclick="sendMessage()">Send</button>
     </div>
+  </div>
+</div>
 
-  <script>
-    const apiKey = '231e3610f2cb02bf6942080dbe2832c67d8a600d625aa1cda5ac884a8f5e59ce';
-    const apiUrl = 'https://api.together.xyz/chat/completions';
-    const maxLength = 700; // Maximum allowed characters for responses
+<style>
+/* Only chatbot CSS */
+.chat-container-wrapper {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 400px; max-width: 90%;
+  border-radius: 8px; overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+.chat-header {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff; padding: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.toggle-btn {
+  background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;
+}
+.chat-container {
+  display: flex; flex-direction: column;
+  height: 400px; background: #f9f9f9;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+.chat-container.minimized { height: 0; opacity: 0; overflow: hidden; }
+.chat-messages {
+  flex: 1; padding: 15px; overflow-y: auto;
+  background-color: #f1f1f1; scroll-behavior: smooth;
+}
+.chat-input {
+  display: flex; padding: 15px;
+  background: #f9f9f9; border-top: 2px solid #ddd;
+}
+.chat-input input {
+  flex: 1; padding: 12px; font-size: 1rem;
+  border: 1px solid #ccc; border-radius: 25px;
+  margin-right: 10px;
+}
+.chat-input button {
+  padding: 12px 20px; font-size: 1rem;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff; border: none; border-radius: 25px;
+  cursor: pointer;
+}
+.message {
+  margin: 10px 0; padding: 10px;
+  border-radius: 10px; font-size: 0.95rem; max-width: 75%;
+}
+.message.user { background: #007bff; color: #fff; margin-left: auto; }
+.message.bot { background: #e5e5e5; color: #333; margin-right: auto; }
+</style>
 
-    // Array to store the conversation history
-    const conversationHistory = [
-        { role: 'system', content: `You are a professor teaching the students on various topics they want to understand better after getting taught from the live teachers  . Always ensure your answers are concise, polite, accurate, and do not exceed ${maxLength} characters. Ensure your answers end with a complete sentence and a smiley.` }
-    ];
+<script>
+const apiKey = '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';
+const apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
+const model = 'llama3-70b-8192';
+const chatMessages = document.getElementById("chatMessages");
 
-    // Append a message to the chat
-    function appendMessage(content, sender) {
-        const messagesContainer = document.getElementById('chatMessages');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender}`;
-        messageDiv.textContent = content;
-        messagesContainer.appendChild(messageDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
+const conversation = [
+  {
+    role: "system",
+    content: `You are a helpful and friendly AI counselor for techoccult.com. a
+Respond using HTML with <strong>, <br>, and <ul><li> for clarity. Keep answers concise, friendly, and visually clear
+🎓 What You Help With:
+- Provide guidance on available online courses for students in Cameroon
+- Explain how to join **primary or secondary school programs** (British-based)
+- Share details about **vocational and diploma programs** (healthcare, IT, fashion, agriculture, etc.)
+- Guide students about **upcoming examinations**
+- Offer information about **India Internship opportunities**
+- Help parents and students choose the best course
 
-    // Display a typing indicator
-    function showTypingIndicator() {
-        const messagesContainer = document.getElementById('chatMessages');
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'message bot typing';
-        typingDiv.id = 'typingIndicator';
-        typingDiv.textContent = 'Typing...';
-        messagesContainer.appendChild(typingDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
+🗓️ Important Updates:
+- The next school/college examination is scheduled for **26th May 2025**
+- Students can join the **India Internship Program** after successful course completion
+- Our **primary and secondary online school** is fully operational for Cameroon students
+ou are an AI professor and academic assistant for **St. Austin’s Learning Portal**, Cameroon (powered by Occultedge India).
 
-    // Remove the typing indicator
-    function hideTypingIndicator() {
-        const typingIndicator = document.getElementById('typingIndicator');
-        if (typingIndicator) {
-            typingIndicator.remove();
-        }
-    }
+🎓 You Help With:
+- Online school & diploma admissions
+- India Internship program
+- Exam schedules & result checking
+- Uploading assignments
+- Supporting students, parents, and faculty
+- Redirecting to the French student zone when needed
 
-    // Function to truncate responses and ensure complete sentences
-    function limitToCompleteAnswer(response, maxLength) {
-        if (response.length <= maxLength) {
-            return response;
-        }
+📅 Important Dates:
+- Next exam: **26th May 2025**
+- Internship applications are open
 
-        // Attempt to truncate the response at the last period (.) within the limit
-        const truncated = response.substring(0, maxLength);
-        const lastPeriodIndex = truncated.lastIndexOf('.');
+🔗 Key Pages to Link:
+- 📥 Admission Form: https://www.occultedge.com/saint-austins-form
+- 🌍 India Internship: https://www.occultedge.com/internsip-to-india
+- 📝 Exam Info: https://www.occultedge.com/examination
+- 📊 Results: https://www.occultedge.com/results
+- 📤 Assignment Upload: https://www.occultedge.com/copy-of-assignment-upload-form-page
+- ✅ Registration Confirmation: https://www.occultedge.com/thank-you-for-registering
 
-        // If a period is found, return the text up to that period
-        if (lastPeriodIndex > 0) {
-            return truncated.substring(0, lastPeriodIndex + 1);
-        }
+- 🇫🇷 French Student Corner: https://www.occultedge.com/french-students-corner
 
-        // If no period is found, return the truncated text
-        return truncated;
-    }
+📚 Sample Courses:
+<ul>
+  <li>Diploma in Nursing, Computer Applications, Data Science</li>
+  <li>Spoken English, Fire Safety, Fashion Design, Tourism</li>
+  <li>Web Design, Hospitality, Pharmacy Assistant, Tailoring</li>
+</ul>
 
-    // Send a message and get a response from the API
-    async function sendMessage() {
-        const userInput = document.getElementById('userInput').value.trim();
-        if (!userInput) return;
 
-        // Add user input to the chat and to the conversation history
-        appendMessage(userInput, 'user');
-        conversationHistory.push({ role: 'user', content: userInput });
-        document.getElementById('userInput').value = '';
 
-        // Show the typing indicator
-        showTypingIndicator();
+✅ Chat Style:
+- Friendly academic guide or principal
+- Use short, clear responses
+- Offer links in html only when users need them
+- Never mention APIs, Groq, or OpenAI
+- Always close with: “Would you like to visit the form or get help with a course? 😊
+📚 Sample Courses Offered:
+- **Vocational Courses**: Fashion Design, Nursing, Baking, Hospitality, IT, Agriculture, Beauty Therapy, Mechanics, Retail, Telecommunications
+- **Diploma Programs**: Medical Lab Technology, Web Design, Fire Safety, Travel & Tourism, Spoken English, Data Analytics, Auto Service Technician
+- **School Subjects**: Mathematics, Physics, Chemistry, Social Studies, English, Computer Science
 
-        try {
-            // Send the conversation history to the API
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: "google/gemma-2b-it",
-                    messages: conversationHistory
-                })
-            });
+🌍 International Advantage:
+All programs are conducted online by expert faculty from India. Certificates are verified and suitable for career advancement or further study.
 
-            if (!response.ok) {
-                const errorDetails = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorDetails}`);
-            }
+🎯 Response Style:
+- Speak like a friendly school principal or academic advisor
+- Use <ul> and <li> for course lists and other conversations when needed
+- Always end with something like: “Would you like help enrolling in a course or seeing the exam schedule? 😊”
 
-            const data = await response.json();
-            let botResponse = data.choices?.[0]?.message?.content || "Sorry, I didn't understand that.";
+🎓 Degree Programs:
+MBA, BBA, MCA, Data Science, IT, Arts, Commerce, and more — all fully online, cost-effective, and accepted in the U.S. and Canada.
 
-            // Ensure the response fits the limit and ends with a complete sentence
-            botResponse = limitToCompleteAnswer(botResponse, maxLength);
+👩‍🏫 Vocational Training Categories (Example):
+- Green Field (Agriculture, Dairy Farmer, Tractor Operator)
+- School Courses (Math, Physics, Chemistry)
+- Apparel Sector (Fashion Designer, Sampling Tailor)
+- Baking & Retail (Professional Baking, Sales Consultant)
+- Beauty & Wellness (Beauty Therapist, Advisor)
+- Humanities (Languages, Psychology, Sociology)
+- Automotive (Technician, Driver, Sales Consultant)
+- Healthcare (Pharmacy Assistant, Medical Technician)
+- IT & Computer Science (Software Developer, Hardware Engineer)
+- Construction (Electrician, Mobile Repair, Technician)
+- Telecommunications (Tower Technician, Field Executive)
+- Hi-Tech (Data Science, Scrum Master, Six Sigma)
 
-            // Add bot response to the chat and to the conversation history
-            appendMessage(botResponse, 'bot');
-            conversationHistory.push({ role: 'assistant', content: botResponse });
-        } catch (error) {
-            appendMessage(`Error: ${error.message}`, 'bot');
-            console.error('Error:', error);
-        } finally {
-            // Remove the typing indicator
-            hideTypingIndicator();
-        }
-    }
+📜 Diploma Courses Offered:
+Diplomas available in Fashion Designing, Solar PV, Lab Technology, Automation Engineering, Fire Safety, Travel, Hospitality, Spoken English, Agriculture, Fisheries, Architecture, Web Design, and many more.
 
-    // Minimize or maximize the chat container
-    function toggleChat() {
-        const chatContainer = document.getElementById('chatContainer');
-        const toggleBtn = document.getElementById('toggleBtn');
+🎓 K-12 school curriculum also available (British pattern).
 
-        if (chatContainer.classList.contains('minimized')) {
-            chatContainer.classList.remove('minimized');
-            toggleBtn.textContent = '−';
-        } else {
-            chatContainer.classList.add('minimized');
-            toggleBtn.textContent = '+';
-        }
-    }
+📚 What We Offer:
+- Blended Mode of Teaching (Hybrid live + online learning)
+- Expert Tutors from Industry
+- Centralized Placement Cell
+- U.S.-based support via Mr. Rayberg (WhatsApp: +1 951-545-1404)
 
-    // Initialize the chat with a welcome message
-    window.onload = () => {
-        appendMessage("Welcome! How can I assist you today?", 'bot');
-        document.getElementById('userInput').focus();
-    };
+🤝 Franchise Opportunities:
+If someone wants to become a franchise, tell them:
+“You can apply to become an official Occultedge franchise partner here: https://www.occultedge.com/apply-now-for-franchise”
+
+📢 Style of Responses:
+- Always respond in clear, structured paragraphs
+- Use <ul> and <li> for course lists
+- Be friendly, helpful, and encouraging
+- End with a soft call-to-action like “Would you like to apply now or see our course catalog? 😊”
+
+NEVER mention OpenAI, Groq, LLaMA, or anything about APIs or models.
+
+Always end answers with a helpful tone or next step, like: “Would you like to start your application now? 😊”`
+  }
+];
+
+
+function appendMessage(text, sender) {
+  const div = document.createElement("div");
+  div.className = `message ${sender}`;
+  div.innerHTML = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function toggleChat(event) {
+  const chat = document.getElementById('chatContainer');
+  const btn = document.getElementById('toggleBtn');
+  const minimized = chat.classList.toggle('minimized');
+  btn.textContent = minimized ? '+' : '−';
+  event.stopPropagation();
+}
+
+function handleEnter(e) {
+  if (e.key === 'Enter') sendMessage();
+}
+
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+  if (!message) return;
+
+  appendMessage(message, 'user');
+  conversation.push({ role: "user", content: message });
+  input.value = '';
+  appendMessage("Typing...", 'bot');
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ model: model, messages: conversation })
+    });
+
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || "Sorry, no response.";
+    chatMessages.lastChild.remove(); // Remove "Typing..."
+    appendMessage(reply, 'bot');
+    conversation.push({ role: "assistant", content: reply });
+
+  } catch (err) {
+    chatMessages.lastChild.remove(); // Remove "Typing..."
+    appendMessage("Error: " + err.message, 'bot');
+  }
+}
+
+window.onload = () => {
+  appendMessage("Hello! I'm the admission counsellor. Ask me anything 😊", 'bot');
+};
 </script>
-
-
-</body>
-</html>
+<!-- CHATBOT END -->
